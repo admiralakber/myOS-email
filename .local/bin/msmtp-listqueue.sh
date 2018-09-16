@@ -1,0 +1,1 @@
+../../Mail/config/bin/msmtp-listqueue.sh

@@ -1,0 +1,50 @@
+IMAPaccount gmail
+host imap.gmail.com
+user aqeel.akber@gmail.com
+PassCmd "qubes-gpg-client -q -d --no-tty ~/Mail/config/credentials.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-bundle.crt
+
+IMAPStore gmail-remote
+account gmail
+
+MaildirStore gmail-local
+# trailing "/" is important
+Path ~/Mail/aqeel.akber@gmail.com/
+Inbox ~/Mail/aqeel.akber@gmail.com/Inbox
+
+Channel gmail-default
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns % "!Sent" "!Drafts" "!Trash"
+Create Both
+SyncState *
+Expunge Both
+
+Channel gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:Sent
+Create Slave
+SyncState *
+Expunge Both
+
+Channel gmail-drafts
+Master :gmail-remote:"[Gmail]/Drafts"
+Slave :gmail-local:Drafts
+Create Slave
+SyncState *
+Expunge Both
+
+Channel gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:Trash
+Create Slave
+SyncState *
+Expunge Both
+
+Group gmail
+Channel gmail-default
+Channel gmail-sent
+Channel gmail-drafts
+Channel gmail-trash
+

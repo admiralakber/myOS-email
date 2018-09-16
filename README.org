@@ -1,0 +1,93 @@
+#+TITLE: myOS Email (Aqeel)
+#+AUTHOR: Aqeel Akber <aqeel.akber@gmail.com>
+#+DATE: 2018-09-17
+
+myOS =/etc/skel= for email. 
+
+* Software
+
+  This repository has configuration for the following:
+  
+  | Task       | Software           |
+  | Receiving  | [[https://marlam.de/msmtp/][msmtp]]              |
+  | Sending    | [[http://isync.sourceforge.net/][isync a.k.a mbsync]] |
+  | Organising | [[https://notmuchmail.org/][notmuch]]            |
+
+** Utilized by
+
+   The following utilizes the above and is setup independently.
+
+   | Task                 | Software |
+   | Viewing / Composing  | [[https://www.gnu.org/software/emacs/][emacs]]    |
+   | Encryption / Signing | [[https://www.gnu.org/software/emacs/][gpg]]      |
+
+* Installation
+
+  1. Clone this repository somewhere
+  2. Edit files in =Mail/config=
+  3. Rename Mail folder
+     =mv Mail/aqeel.akber@gmail.com Mail/myemail@example.com=
+  4. Copy contents into =/etc/skel= or directly into =$HOME=
+
+* Usage
+
+  Download email:
+  #+BEGIN_SRC shell
+  mbsync -Va
+  #+END_SRC
+
+  Tag emails:
+  #+BEGIN_SRC shell
+  notmuch new
+  #+END_SRC
+
+  Enqueue email for sending:
+  #+BEGIN_SRC shell
+  $HOME/.local/bin/msmtp-enqueue.sh <just_like_sendmail> 
+  #+END_SRC
+
+  The above sends emails immediately if it can ping Google's DNS server:
+  =8.8.8.8=.
+
+  Check outbox queue:
+  #+BEGIN_SRC shell
+  $HOME/.local/bin/msmtp-listqueue.sh
+  #+END_SRC
+
+  Try send mail now:
+  #+BEGIN_SRC shell
+  $HOME/.local/bin/msmtp-runqueue.sh
+  #+END_SRC
+
+* Structure
+
+  #+BEGIN_SRC 
+  .
+  ├── .local
+  │   └── bin
+  │       ├── msmtp-enqueue.sh -> ../../Mail/config/bin/msmtp-enqueue.sh
+  │       ├── msmtp-listqueue.sh -> ../../Mail/config/bin/msmtp-listqueue.sh
+  │       └── msmtp-runqueue.sh -> ../../Mail/config/bin/msmtp-runqueue.sh
+  ├── Mail
+  │   ├── aqeel.akber@gmail.com
+  │   ├── config
+  │   │   ├── bin
+  │   │   │   ├── msmtp-enqueue.sh
+  │   │   │   ├── msmtp-listqueue.sh
+  │   │   │   └── msmtp-runqueue.sh
+  │   │   ├── credentials.gpg
+  │   │   ├── mbsyncrc
+  │   │   ├── msmtprc
+  │   │   └── notmuch-config
+  │   ├── .msmtpqueue
+  │   └── .notmuch
+  ├── .mbsyncrc -> Mail/config/mbsyncrc
+  ├── .msmtprc -> Mail/config/msmtprc
+  ├── .notmuch-config -> Mail/config/notmuch-config
+
+  #+END_SRC
+
+* Acknowledgments / Contributions
+
+  + =msmtpqueue= scripts are from the msmtp project
+

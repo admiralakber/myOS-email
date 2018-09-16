@@ -1,0 +1,20 @@
+[database]
+path=/home/user/Mail
+
+[user]
+name=Aqeel Akber
+primary_email=aqeel.akber@gmail.com
+
+[new]
+tags=unread;inbox;new;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true
+
+[crypto]
+gpg_path=/usr/bin/qubes-gpg-client
+
