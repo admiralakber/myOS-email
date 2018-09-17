@@ -1,13 +1,13 @@
-#+TITLE: myOS Email (Aqeel)
+#+TITLE: myOS email (Aqeel)
 #+AUTHOR: Aqeel Akber <aqeel.akber@gmail.com>
 #+DATE: 2018-09-17
 
-myOS =/etc/skel= for email. 
+myOS =/etc/skel= for email.
 
 * Software
 
   This repository has configuration for the following:
-  
+
   | Task       | Software           |
   | Receiving  | [[https://marlam.de/msmtp/][msmtp]]              |
   | Sending    | [[http://isync.sourceforge.net/][isync a.k.a mbsync]] |
@@ -43,7 +43,7 @@ myOS =/etc/skel= for email.
 
   Enqueue email for sending:
   #+BEGIN_SRC shell
-  $HOME/.local/bin/msmtp-enqueue.sh <just_like_sendmail> 
+  $HOME/.local/bin/msmtp-enqueue.sh <just_like_sendmail>
   #+END_SRC
 
   The above sends emails immediately if it can ping Google's DNS server:
@@ -61,7 +61,7 @@ myOS =/etc/skel= for email.
 
 * Structure
 
-  #+BEGIN_SRC 
+  #+BEGIN_SRC
   .
   ├── .local
   │   └── bin
@@ -90,4 +90,3 @@ myOS =/etc/skel= for email.
 * Acknowledgments / Contributions
 
   + =msmtpqueue= scripts are from the msmtp project
-
